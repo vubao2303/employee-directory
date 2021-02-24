@@ -5,20 +5,17 @@ function TableHead() {
 
   return (
     <div>
-      <tr>
-        yeahyeah
-        {/* {columnHeadings.map((col) => (
-          <th scope='col' key={`header-${col}`}>
-            <button
-              className='btn font-weight-bold'
-              type='button'
-              onClick={() => props.sort}
-            >
-              {col}
-            </button>
-          </th>
-        ))} */}
-      </tr>
+     
+      <thead>
+        <tr>
+          <th>Image</th>
+          <th>Name</th>
+          <th>Phone</th>
+          <th>Email</th>
+          <th>DOB</th>
+        </tr>
+      </thead>
+     
     </div>
   );
 }
