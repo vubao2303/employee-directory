@@ -9,7 +9,7 @@ function SearchForm(props) {
         placeholder='Type in a name to search'
         aria-label='Search'
         onChange= {props.onChange}
-        value={props.search}
+        value={props.value}
       ></input>
     </div>
   );

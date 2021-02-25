@@ -92,7 +92,8 @@ function App() {
     return (
       <div>
         <Header />
-        <Search className="form-group mt-5" type= "text" onChange={handleChange} value={search}/>
+        <Search className="form-group mt-5" type= "text" onChange={handleChange} value={search}
+        />
         {/* ()=> call the function  */}
         <Table>
           <TableHead />
