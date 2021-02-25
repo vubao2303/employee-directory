@@ -1,6 +1,6 @@
 import React from 'react';
 
-function TableHead() {
+function TableHead(props) {
   // const columnHeadings = [`Image`, `Name`, `Phone`, `Email`, `D.O.B.`];
 
   return (
@@ -8,7 +8,7 @@ function TableHead() {
         <thead>
           <tr>
             <th scope="col">Image</th>
-            <th scope="col">Name ▼</th>
+            <th scope="col" onClick= {props.sortName}>Name ▼</th>
             <th scope="col">Phone</th>
             <th scope="col">Email</th>
             <th scope="col">DOB</th>

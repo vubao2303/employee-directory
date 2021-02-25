@@ -81,6 +81,7 @@ function App() {
 
   // }
   const sortName =()=> {
+    
     const newSortUser =[]
     users.sort(function(a, b){
       var nameA=a.name.toLowerCase(), nameB=b.name.toLowerCase()
@@ -110,7 +111,7 @@ function App() {
               index={index}
               image={user.image}
               name={user.firstname + " " + user.lastname}
-              // sortName= {sortName}
+              sortName= {sortName}
               phone={user.phone}
               email={user.email}
               dob={user.dob}
