@@ -27,6 +27,9 @@ function App() {
       .catch(err => console.log(err));
   }
 
+  const handleChange= e =>{
+    setSearch(e.target.value);
+  }
   // fucntion search 
   //   function handleSubmit(e) {
   //     e.preventDefault();
@@ -89,7 +92,7 @@ function App() {
     return (
       <div>
         <Header />
-        <Search className="form-group mt-5" onKeyUp={(e) => handleSearch(e)} newUsers ={setSearch} />
+        <Search className="form-group mt-5" type= "text" onChange={handleChange} value={search}/>
         {/* ()=> call the function  */}
         <Table>
           <TableHead />

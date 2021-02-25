@@ -8,7 +8,8 @@ function SearchForm(props) {
         type='text'
         placeholder='Type in a name to search'
         aria-label='Search'
-        onKeyUp= {props.onKeyUp}
+        onChange= {props.onChange}
+        value={props.search}
       ></input>
     </div>
   );
