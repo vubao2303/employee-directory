@@ -1,35 +1,4 @@
-//  Bare minumum
-// do the bareminimum of showing up on the pagge 
-
-
-// import React from "react";
-// import Header from "./components/Header.js"
-// import Search from "./components/SearchForm.js"
-// import TableHead from "./components/TableHead.js"
-// import Tablebb from "./components/Table.js"
-
-// function App() {
-
-//   return (
-//       <div>
-//         <Header />
-//         <Search />
-//         <TableHead/>
-//         <Tablebb />
-
-//         {/* <Table users={users}/> */}
-//       </div>
-//     );
-// }
-// export default App;
-
-
-
-// Do the Hard thing where you create hooks 
-// and make function 
-
-
-
+// import HAVE to be capitalize 
 import React, { useEffect, useState } from "react";
 import Header from "./components/Header.js"
 import Search from "./components/SearchForm.js"
@@ -38,14 +7,11 @@ import API from "./utils/API.js";
 import Table from "./components/Table.js"
 import TableHead from "./components/TableHead.js"
 
-
-
 function App() {
   // set hooks 
-
   const [users, setUsers] = useState([]);
   const [search, setSearch] = useState("")
-  const [sort, setSort] = useState("")
+  // const [sort, setSort] = useState("")
 
   //Use Effect
   useEffect(() => {
@@ -60,82 +26,124 @@ function App() {
     })
       .catch(err => console.log(err));
   }
-  // fucntion search 
-  function handleSubmit(e) {
-    e.preventDefault();
-  }
 
+  // fucntion search 
+  //   function handleSubmit(e) {
+  //     e.preventDefault();
+  //   }
+    useEffect (() => {
+      API.SearchTerm ()
+      .then(res => setSearch({name: {users}}))
+      handleSearch()
+   }, [search])
 
   function handleSearch(e) {
-    // console.log(e.target.value)
+    console.log(e.target.value)
+
     // handle fitlter a new array with that matching input 
     // const searchUser = event => {
-      setSearch(e.target.value);
+    setSearch(e.target.value);
     // };
   }
-  // Function SORT 
+
+  // useEffect(() => {
+  //   if (!search) {
+  //     return;
+  //   }
+
+  //   API.searchTerm(search)
+  //     .then(res => {
+  //       if (res.data.length === 0) {
+  //         throw new Error("No results found.");
+  //       }
+  //       if (res.data.status === "error") {
+  //         throw new Error(res.data.message);
+  //       }
+  //       setUsers();
+  //     })
+
+  // }, [search]);
+
+  // const handleInputChange = event => {
+  //   setSearch(event.target.value);
+  // };
+
+
+
+
+  // useEffect(() => {
+  //   if (search === "") {
+  //     setSearch(users)
+  //     return;
+  //   }
+  //   let userSearch = [];
+  //   for (let i = 0; i < Employees.length; i++) {
+  //     if (Employees[i].name.toLowerCase().includes(search.toLowerCase())) {
+  //       usersSearch.push(users[i]);
+  //     };
+  //   };
+  //   setEmployees(employeeSearch);
+  // }, [search]);
+ 
+
+    return (
+      <div>
+        <Header />
+        <Search className="form-group mt-5" onKeyUp={(e) => handleSearch(e)} newUsers ={setSearch} />
+        {/* ()=> call the function  */}
+        <Table>
+          <TableHead />
+          {users.map((user, index) => {
+            return (
+              <TableRows
+                index={index}
+                image={user.image}
+                name={user.firstname + " " + user.lastname}
+                // sortName={sortName}
+                phone={user.phone}
+                email={user.email}
+                dob={user.dob}
+                key={index} />
+            )
+
+          })}
+        </Table>
+
+      </div>
+    );
+  }
+
+
+export default App;
+
+
+ // Function SORT 
 
   // const sortName = ()=> {
   //   users.sort();
   //   users.reverse();
 
+  // // }
+  // const sortName = () => {
+
+  //   const newSortUser = []
+  //   users.sort(function (a, b) {
+  //     var nameA = a.name.toLowerCase(), nameB = b.name.toLowerCase()
+  //     if (nameA < nameB) //sort string ascending
+  //       return -1
+  //     if (nameA > nameB)
+  //       return 1
+  //     return 0 //default return value (no sorting)
+  //   })
+  //   setUsers(users)
   // }
-  const sortName =()=> {
-    
-    const newSortUser =[]
-    users.sort(function(a, b){
-      var nameA=a.name.toLowerCase(), nameB=b.name.toLowerCase()
-      if (nameA < nameB) //sort string ascending
-          return -1 
-      if (nameA > nameB)
-          return 1
-      return 0 //default return value (no sorting)
-    })
-   setUsers(users)
-  //   // when sort button is clicked, the ordoer of the aaray is backward 
+    // //   // when sort button is clicked, the ordoer of the aaray is backward 
 
-  }
-
-  return (
-    <div>
-      <Header />
-      <Search className="form-group mt-5" onKeyUp={(e) =>handleSearch(e)} />
-      {/* ()=> call the function  */}
-
-
-      <Table>
-        <TableHead />
-        {users.map((user, index) => {
-          return (
-            <TableRows
-              index={index}
-              image={user.image}
-              name={user.firstname + " " + user.lastname}
-              sortName= {sortName}
-              phone={user.phone}
-              email={user.email}
-              dob={user.dob}
-              key={index} />
-          )
-
-        })}
-      </Table>
-
-    </div>
-  );
-}
-export default App;
-
+    // }
 
 //  
 // do the bareminimum of showing up on the pagge 
 // 
-
-
-
-
-
-
 
 // import React, { useEffect, useState } from "react";
 // import Header from "./components/Header.js"
@@ -294,4 +302,4 @@ export default App;
   //   const sortAsc = users.name.sort();
   //   const sortDesc = sortAsc.reverse();
   //   setSort((sort === "" || sortDesc) ? sortAsc : sortDesc);
-  // }
+

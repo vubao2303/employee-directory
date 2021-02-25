@@ -26,7 +26,6 @@ react
   <li> Bacic HTML doctype
   <li> Add bootstrap access link 
   <li> Contains root id so we can use to twist the page 
-
   </li>
   </ul>
 
@@ -34,23 +33,20 @@ react
   <ul> 
   <li> Component folders 
 
-  - Header.js file has header style and the rule of the game
-  
-  - NavBar.js file uses score, topScore, and  message props that passed from App.js
-  
-  - PictureCards.js file grabs id, image, and handleClick function from App.js and uses as props to populate the cards on the page 
-  
-  - Wrapper.js file acts as a container for PictureCards 
+  - Header.js file has header title 
 
   <li> Style folder contains style.css file to decorate the interface
   <li> App.js file
 
-  - Setting State that includes images as a array, clicked set to false, count and top score started at 0, a message as an empty string. 
+  - Imports all components 
+
+  - Create hooks 
   
-  - Add handleClick funtion so that it will add the score if the image first clied, set score to zero if the imgae is clicked twice, send result message, and shuffle the cards once the image is clicked 
+  - Add sort and search funtion 
   
   - Render all the necessary components to set up the page 
 
+* In util folder 
   <li> images.json file contains all the roses pictures, each has an id, a name, an image link and a click with flase boleean value, 
   <li> index.js file render App component and send it to html 
   
@@ -69,45 +65,63 @@ ReactDOM.render(<App />, document.getElementById("root"));
 ```
 
 ``` Javascript
-  render() {
-    return (
-      <div>
+  return (
+    <div>
       <Header />
-      <NavBar />
-      <Wrapper>
-        <PictureCard />
-      </Wrapper> 
-      </div>
-    )}
+      <Search className="form-group mt-5" onKeyUp={(e) =>handleSearch(e)} />
+      {/* ()=> call the function  */}
+      <Table>
+        <TableHead /> {users.map((user, index) => {
+          return (
+            <TableRows/>
+          )})}
+      </Table>
+    </div>
+  );
 ```
 
 Creates components as independent and reusable bits of code
 ``` Javascript
-function PictureCard(props) {
-    return (
-      <div className="img-container">
-        <img onClick={() => props.handleClick(props.id, props.click)} className="shuffle" height="150" width= "250" alt="rose1" src= {props.image} />
-      </div> )}
-export default PictureCard;
+import React from 'react';
+function SearchForm(props) {
+  return (
+    <div className='SearchBar'>
+      <input
+        className='form-control'
+        type='text'
+        placeholder='Type in a name to search'
+        aria-label='Search'
+        onKeyUp= {props.onKeyUp}
+      ></input>
+    </div> ); }
+export default SearchForm;
 ``` 
 ``` Javascript
-function Nav(props) {
+function TableRows({ index,image, name, phone, email, dob }) {
   return (
-    <nav style={styles.navbarStyle} className="navbar">
-      <div> {props.message} </div>
-      <div> Score: {props.Score}| Top score: {props.TopScore} </div>
-    </nav> );}
-export default Nav;
+    <tr>
+      <td>
+        <img src={image}/>
+      </td>
+      <td>{name}</td>
+      <td>{phone}</td>
+      <td>{email}</td>
+      <td>{dob}</td>
+    </tr>
+  )
+}
+export default TableRows;
 ``` 
 
 Import react and other components to App.js file
 ``` Javascript
-import React, { Component } from "react";
-import PictureCard from "./components/PictureCard";
-import Wrapper from "./components/Wrapper";
-import Header from "./components/Header";
-import NavBar from "./components/NavBar";
-import pics from "./images.json";
+import React, { useEffect, useState } from "react";
+import Header from "./components/Header.js"
+import Search from "./components/SearchForm.js"
+import TableRows from "./components/TableRows.js"
+import API from "./utils/API.js";
+import Table from "./components/Table.js"
+import TableHead from "./components/TableHead.js"
 ```
 
 Set property in App.js file to send to other components 
