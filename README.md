@@ -1,70 +1,150 @@
-# Getting Started with Create React App
+# employees-directory
+react
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-## Available Scripts
+![]()
 
-In the project directory, you can run:
 
-### `npm start`
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+## Deployed-Link
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+[Deployed Link]()  
 
-### `npm test`
+# Table of Contents 
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+| |||
+|:-:|:-:|:-:|
+|[Project Introduction](#employees-directory) | [Table of Contents](#table-of-contents) | [Deployed Link](#Deployed-Link) |  [Description of Page Building](#Description-of-Page-Building)| [Code Snippets](#code-snippet) 
+| [Technologies Used](#Technologies-Used) |  [Author](#author) | [License](#License)
 
-### `npm run build`
+---
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## Description of Page Building 
+* InstallCreate React App globally by running `npx create-react-app react-app` in terminal
+* In public folder contains the index.html file
+   <ul> 
+  <li> Bacic HTML doctype
+  <li> Add bootstrap access link 
+  <li> Contains root id so we can use to twist the page 
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+  </li>
+  </ul>
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+* In src (source) folder
+  <ul> 
+  <li> Component folders 
 
-### `npm run eject`
+  - Header.js file has header style and the rule of the game
+  
+  - NavBar.js file uses score, topScore, and  message props that passed from App.js
+  
+  - PictureCards.js file grabs id, image, and handleClick function from App.js and uses as props to populate the cards on the page 
+  
+  - Wrapper.js file acts as a container for PictureCards 
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+  <li> Style folder contains style.css file to decorate the interface
+  <li> App.js file
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+  - Setting State that includes images as a array, clicked set to false, count and top score started at 0, a message as an empty string. 
+  
+  - Add handleClick funtion so that it will add the score if the image first clied, set score to zero if the imgae is clicked twice, send result message, and shuffle the cards once the image is clicked 
+  
+  - Render all the necessary components to set up the page 
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+  <li> images.json file contains all the roses pictures, each has an id, a name, an image link and a click with flase boleean value, 
+  <li> index.js file render App component and send it to html 
+  
+  </li>
+  </ul>
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
 
-## Learn More
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+## Code Snippet
+In terminal, run 
+`npx create-react-app react-app`
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+To use components in  application
+``` Javascript
+ReactDOM.render(<App />, document.getElementById("root"));
+```
 
-### Code Splitting
+``` Javascript
+  render() {
+    return (
+      <div>
+      <Header />
+      <NavBar />
+      <Wrapper>
+        <PictureCard />
+      </Wrapper> 
+      </div>
+    )}
+```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+Creates components as independent and reusable bits of code
+``` Javascript
+function PictureCard(props) {
+    return (
+      <div className="img-container">
+        <img onClick={() => props.handleClick(props.id, props.click)} className="shuffle" height="150" width= "250" alt="rose1" src= {props.image} />
+      </div> )}
+export default PictureCard;
+``` 
+``` Javascript
+function Nav(props) {
+  return (
+    <nav style={styles.navbarStyle} className="navbar">
+      <div> {props.message} </div>
+      <div> Score: {props.Score}| Top score: {props.TopScore} </div>
+    </nav> );}
+export default Nav;
+``` 
 
-### Analyzing the Bundle Size
+Import react and other components to App.js file
+``` Javascript
+import React, { Component } from "react";
+import PictureCard from "./components/PictureCard";
+import Wrapper from "./components/Wrapper";
+import Header from "./components/Header";
+import NavBar from "./components/NavBar";
+import pics from "./images.json";
+```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+Set property in App.js file to send to other components 
+``` Javascript 
+  <TableRows
+    index={index}
+    image={user.image}
+    name={user.firstname + " " + user.lastname}
+    sortName= {sortName}
+    phone={user.phone}
+    email={user.email}
+    dob={user.dob}
+    key={index} />
+```
 
-### Making a Progressive Web App
+## Technologies Used
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+||||||
+|:-:|:-:|:-:|:-:|:-:|
+|[HTML](https://developer.mozilla.org/en-US/docs/Web/HTML) | [CSS](https://developer.mozilla.org/en-US/docs/Web/CSS) | [React](https://reactjs.org/docs/getting-started.html) | [Javascript](https://developer.mozilla.org/en-US/docs/Web/JavaScript)  | [GitHub](https://github.com/)
 
-### Advanced Configuration
+<!-- |||||
+|:-:|:-:|:-:|:-:|
+|[Express](https://expressjs.com/) |[Node.js](https://nodejs.org/en/) | [Mongoose](https://mongoosejs.com/docs/defaults.html) | [Morgan](https://www.npmjs.com/package/morgan) -->
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
 
-### Deployment
+<br>
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+## Author
 
-### `npm run build` fails to minify
+| | |
+| --- | --- |
+|**B Tram Vu**|[![Linkedin](https://i.stack.imgur.com/gVE0j.png) LinkedIn](https://www.linkedin.com/in/b-tram-vu/) [![GitHub](https://i.stack.imgur.com/tskMh.png) GitHub](https://github.com/vubao2303) | [![Portfolio](https://i.stack.imgur.com/gVE0j.png) Portfolio](https://www.linkedin.com/in/b-tram-vu-866250121/)
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+
+---
+
+## License
+
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
