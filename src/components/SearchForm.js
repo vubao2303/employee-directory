@@ -1,6 +1,6 @@
 import React from 'react';
 
-function SearchForm() {
+function SearchForm(props) {
   return (
     <div className='SearchBar'>
       <input
@@ -8,6 +8,7 @@ function SearchForm() {
         type='text'
         placeholder='Type in a name to search'
         aria-label='Search'
+        onKeyUp= {props.onKeyUp}
       ></input>
     </div>
   );

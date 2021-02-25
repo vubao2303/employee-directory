@@ -27,36 +27,10 @@ function Main() {
   function capitalizeFirstLetter(string = "") {
     return string.charAt(0).toUpperCase() + string.slice(1);
   }
+  handleInputChange = event => {
+    setUser({ search: event.target.value });
+  };
 
-  function nextUser(userIndex) {
-    // Ensure that the user index stays within our range of users
-    if (userIndex >= users.length) {
-      userIndex = 0;
-    }
-    setUserIndex(userIndex);
-    setUser(users[userIndex]);
-  }
-
-  function previousUser(userIndex) {
-    // Ensure that the user index stays within our range of users
-    if (userIndex < 0) {
-      userIndex = users.length - 1;
-    }
-    setUserIndex(userIndex);
-    setUser(users[userIndex]);
-  }
-
-  function handleBtnClick(event) {
-    // Get the title of the clicked button
-    const btnName = event.target.getAttribute("data-value");
-    if (btnName === "next") {
-      const newUserIndex = userIndex + 1;
-      nextUser(newUserIndex);
-    } else {
-      const newUserIndex = userIndex - 1;
-      previousUser(newUserIndex);
-    }
-  }
 
   return (
     <UserContext.Provider value={{ user, users, userIndex, capitalizeFirstLetter, handleBtnClick }}>

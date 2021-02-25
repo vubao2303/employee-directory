@@ -4,22 +4,19 @@ function TableHead() {
   // const columnHeadings = [`Image`, `Name`, `Phone`, `Email`, `D.O.B.`];
 
   return (
-    <div>
-     
-      <thead>
-        <tr>
-          <th>Image</th>
-          <th>Name</th>
-          <th>Phone</th>
-          <th>Email</th>
-          <th>DOB</th>
-        </tr>
-      </thead>
-     
-    </div>
+    
+        <thead>
+          <tr>
+            <th scope="col">Image</th>
+            <th scope="col">Name</th>
+            <th scope="col">Phone</th>
+            <th scope="col">Email</th>
+            <th scope="col">DOB</th>
+          </tr>
+        </thead>
+  
   );
 }
-
 export default TableHead;
 
 // import React from 'react';
