@@ -20,7 +20,7 @@ function Table(props) {
       <table className="table">
         {props.children}
         <tbody>
-       
+
           {props.children}
         </tbody>
       </table>

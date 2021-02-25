@@ -5,7 +5,7 @@
 // import React from "react";
 // import Header from "./components/Header.js"
 // import Search from "./components/SearchForm.js"
-
+// import TableHead from "./components/TableHead.js"
 // import Tablebb from "./components/Table.js"
 
 // function App() {
@@ -14,7 +14,7 @@
 //       <div>
 //         <Header />
 //         <Search />
-
+//         <TableHead/>
 //         <Tablebb />
 
 //         {/* <Table users={users}/> */}
@@ -44,8 +44,8 @@ function App() {
   // set hooks 
 
   const [users, setUsers] = useState([]);
-  // const [search, setSearch] = useState("")
-  // const [sort, setSort] = useState("")
+  const [search, setSearch] = useState("")
+  const [sort, setSort] = useState("")
 
   //Use Effect
   useEffect(() => {
@@ -67,27 +67,33 @@ function App() {
 
 
   function handleSearch(e) {
-    console.log(e.target.value)
+    // console.log(e.target.value)
     // handle fitlter a new array with that matching input 
     // const searchUser = event => {
-    //   // setSearch(event.target.value);
+      setSearch(e.target.value);
     // };
   }
   // Function SORT 
-  // const sortName =()=> {
 
-  //   users.sort(function(a, b){
-  //     var nameA=a.name.toLowerCase(), nameB=b.name.toLowerCase()
-  //     if (nameA < nameB) //sort string ascending
-  //         return -1 
-  //     if (nameA > nameB)
-  //         return 1
-  //     return 0 //default return value (no sorting)
-  //   })
-  // //   // const newSortUser =[]
-  // //   // when sort button is clicked, the ordoer of the aaray is backward 
+  // const sortName = ()=> {
+  //   users.sort();
+  //   users.reverse();
 
-  // // }
+  // }
+  const sortName =()=> {
+    const newSortUser =[]
+    users.sort(function(a, b){
+      var nameA=a.name.toLowerCase(), nameB=b.name.toLowerCase()
+      if (nameA < nameB) //sort string ascending
+          return -1 
+      if (nameA > nameB)
+          return 1
+      return 0 //default return value (no sorting)
+    })
+   setUsers(users)
+  //   // when sort button is clicked, the ordoer of the aaray is backward 
+
+  }
 
   return (
     <div>
@@ -113,9 +119,6 @@ function App() {
 
         })}
       </Table>
-
-
-
 
     </div>
   );
