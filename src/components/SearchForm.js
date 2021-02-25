@@ -2,6 +2,7 @@ import React from 'react';
 
 function SearchForm(props) {
   return (
+    <div className ="container">
     <div className='SearchBar'>
       <input
         className='form-control'
@@ -11,6 +12,7 @@ function SearchForm(props) {
         onChange= {props.onChange}
         value={props.value}
       ></input>
+    </div>
     </div>
   );
 }
