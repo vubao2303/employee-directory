@@ -4,7 +4,7 @@ function TableRows({ index,image, name, phone, email, dob }) {
   return (
     <tr> 
       <td>
-        <img src={image}/>
+        <img alt="employees" src={image}/>
       </td>
       <td>{name}</td>
       <td>{phone}</td>

@@ -11,44 +11,83 @@ function App() {
   // set hooks 
   const [users, setUsers] = useState([]);
   const [search, setSearch] = useState("")
-  const [seacrhResult, setSearchResult]= useState("")
+  // const [seacrhResult, setSearchResult]= useState("")
+  // const [seacrhResult, setSearchResult]= useState([])
   // const [sort, setSort] = useState("")
+  
 
   //Use Effect
   useEffect(() => {
     loadUsers();
   }, [])
-
   //Function loadUsers 
   const loadUsers = () => {
     API.getEmployees().then((users) => {
-      setUsers(users)
+      setUsers(users.sort())
       console.log(users)
     })
       .catch(err => console.log(err));
   }
 
-  const handleChange= e =>{
-    setSearch(e.target.value);
+
+// One way
+  // const handleSearch = event => {
+    // e.preventDefault();
+  //   // Destructure the name and value properties off of event.target
+  //   // Update the appropriate state
+  //   const { value } = event.target;
+  //   setSearch(value);
+  // };
+
+  // Two way
+  // const handleSearch= e =>{
+  //   e.preventDefault();
+  //   // const { value } = e.target;
+  //   // setSearch(value);
+  //   setSearch(e.target.value);
+  //   if (search.length >0){
+  //   setUsers(users.filter(user => {
+  //     return user.firstName.include(e.target.value ) &&   user.lastName.include(e.target.value );
+  //   }));
+  // }
+
+  // }
+
+  // Threeway 
+  const handleSearch = e => {
+    e.preventDefault();
+    const { value } = e.target;
+    console.log(value);
+
+    setSearch(value);
+
+    let searchUsers = users.filter(user => {
+      return user.firstname.includes(search);
+    });
+    setUsers(searchUsers);
   }
 
-  useEffect (() => {
-    const result = users.filter(user => 
-      user.includes(search)
-      );
-      setSearchResult(result);
-    },[search]);
+  // if (search.length >0){
+  //   user = users.filter(user => {
+  //     return user.firstname.include(e.target.value );
+  //   });
+  // }
+  // when search, you want to return the new array, with only the e.target.value in it 
+
+  // useEffect (() => {
+  //   handleSearch();
+  // }[search]);
 
   //   API.SearchTerm ()
   //   .then(res => setSearch({name: {users}}))
   //   handleSearch()
   // }, [search])
 
-  function handleSearch(e) {
-    console.log(e.target.value)
-    setSearch(e.target.value);
-    // };
-  }
+  // function handleSearch(e) {
+  //   console.log(e.target.value)
+  //   setSearch(e.target.value);
+  //   // };
+  // }
 
   // useEffect(() => {
   //   if (!search) {
@@ -73,28 +112,15 @@ function App() {
     return (
       <div>
         <Header />
-        <Search className="form-group mt-5" type= "text" onChange={handleChange} value={search}
-        />
-          {/* {searchResult.map((user, index) => {
-            return (
-              <TableRows
-                index={index}
-                image={user.image}
-                name={user.firstname + " " + user.lastname}
-                // sortName={sortName}
-                phone={user.phone}
-                email={user.email}
-                dob={user.dob}
-                key={index} />
-            )
-
-          })} */}
+        <Search
+          className="form-group mt-5" type= "text"  onChange={handleSearch} value={search} users={users}/>
 
         {/* ()=> call the function  */}
         <Table>
-          <TableHead />
+          
           {users.map((user, index) => {
             return (
+              // <SearchResult >
               <TableRows
                 index={index}
                 image={user.image}
@@ -118,10 +144,12 @@ export default App;
 
 
  // Function SORT 
+//  const sortName = users.sort()
 
   // const sortName = ()=> {
   //   users.sort();
   //   users.reverse();
+
 
   // // }
   // const sortName = () => {
@@ -310,149 +338,149 @@ export default App;
 // 
 // B TRYING, THIS WORKS 
 // import HAVE to be capitalize 
-import React, { useEffect, useState } from "react";
-import Header from "./components/Header.js"
-import Search from "./components/SearchForm.js"
-import TableRows from "./components/TableRows.js"
-import API from "./utils/API.js";
-import Table from "./components/Table.js"
-import TableHead from "./components/TableHead.js"
+// import React, { useEffect, useState } from "react";
+// import Header from "./components/Header.js"
+// import Search from "./components/SearchForm.js"
+// import TableRows from "./components/TableRows.js"
+// import API from "./utils/API.js";
+// import Table from "./components/Table.js"
+// import TableHead from "./components/TableHead.js"
 
-function App() {
-  // set hooks 
-  const [users, setUsers] = useState([]);
-  const [search, setSearch] = useState("")
-  const [seacrhResult, setSearchResult]= useState("")
-  // const [sort, setSort] = useState("")
+// function App() {
+//   // set hooks 
+//   const [users, setUsers] = useState([]);
+//   const [search, setSearch] = useState("")
+//   const [seacrhResult, setSearchResult]= useState("")
+//   // const [sort, setSort] = useState("")
 
-  //Use Effect
-  useEffect(() => {
-    loadUsers();
-  }, [])
+//   //Use Effect
+//   useEffect(() => {
+//     loadUsers();
+//   }, [])
 
-  //Function loadUsers 
-  const loadUsers = () => {
-    API.getEmployees().then((users) => {
-      setUsers(users)
-      console.log(users)
-    })
-      .catch(err => console.log(err));
-  }
+//   //Function loadUsers 
+//   const loadUsers = () => {
+//     API.getEmployees().then((users) => {
+//       setUsers(users)
+//       console.log(users)
+//     })
+//       .catch(err => console.log(err));
+//   }
 
-  const handleChange= e =>{
-    setSearch(e.target.value);
-  }
+//   const handleChange= e =>{
+//     setSearch(e.target.value);
+//   }
 
-  useEffect (() => {
-    const result = users.filter(user => 
-      user.includes(search)
-      );
-      setSearchResult(result);
-    },[search]);
-
-
-  //   API.SearchTerm ()
-  //   .then(res => setSearch({name: {users}}))
-  //   handleSearch()
-  // }, [search])
-
-  function handleSearch(e) {
-    console.log(e.target.value)
-
-    // handle fitlter a new array with that matching input 
-    // const searchUser = event => {
-    setSearch(e.target.value);
-    // };
-  }
-
-  // useEffect(() => {
-  //   if (!search) {
-  //     return;
-  //   }
-
-  //   API.searchTerm(search)
-  //     .then(res => {
-  //       if (res.data.length === 0) {
-  //         throw new Error("No results found.");
-  //       }
-  //       if (res.data.status === "error") {
-  //         throw new Error(res.data.message);
-  //       }
-  //       setUsers();
-  //     })
-
-  // }, [search]);
-
-  // const handleInputChange = event => {
-  //   setSearch(event.target.value);
-  // };
+//   useEffect (() => {
+//     const result = users.filter(user => 
+//       user.includes(search)
+//       );
+//       setSearchResult(result);
+//     },[search]);
 
 
+//   //   API.SearchTerm ()
+//   //   .then(res => setSearch({name: {users}}))
+//   //   handleSearch()
+//   // }, [search])
+
+//   function handleSearch(e) {
+//     console.log(e.target.value)
+
+//     // handle fitlter a new array with that matching input 
+//     // const searchUser = event => {
+//     setSearch(e.target.value);
+//     // };
+//   }
+
+//   // useEffect(() => {
+//   //   if (!search) {
+//   //     return;
+//   //   }
+
+//   //   API.searchTerm(search)
+//   //     .then(res => {
+//   //       if (res.data.length === 0) {
+//   //         throw new Error("No results found.");
+//   //       }
+//   //       if (res.data.status === "error") {
+//   //         throw new Error(res.data.message);
+//   //       }
+//   //       setUsers();
+//   //     })
+
+//   // }, [search]);
+
+//   // const handleInputChange = event => {
+//   //   setSearch(event.target.value);
+//   // };
 
 
-  // useEffect(() => {
-  //   if (search === "") {
-  //     setSearch(users)
-  //     return;
-  //   }
-  //   let userSearch = [];
-  //   for (let i = 0; i < Employees.length; i++) {
-  //     if (Employees[i].name.toLowerCase().includes(search.toLowerCase())) {
-  //       usersSearch.push(users[i]);
-  //     };
-  //   };
-  //   setEmployees(employeeSearch);
-  // }, [search]);
+
+
+//   // useEffect(() => {
+//   //   if (search === "") {
+//   //     setSearch(users)
+//   //     return;
+//   //   }
+//   //   let userSearch = [];
+//   //   for (let i = 0; i < Employees.length; i++) {
+//   //     if (Employees[i].name.toLowerCase().includes(search.toLowerCase())) {
+//   //       usersSearch.push(users[i]);
+//   //     };
+//   //   };
+//   //   setEmployees(employeeSearch);
+//   // }, [search]);
  
 
-    return (
-      <div>
-        <Header />
-        <Search className="form-group mt-5" type= "text" onChange={handleChange} value={search}
-        />
-          {/* {searchResult.map((user, index) => {
-            return (
-              <TableRows
-                index={index}
-                image={user.image}
-                name={user.firstname + " " + user.lastname}
-                // sortName={sortName}
-                phone={user.phone}
-                email={user.email}
-                dob={user.dob}
-                key={index} />
-            )
+//     return (
+//       <div>
+//         <Header />
+//         <Search className="form-group mt-5" type= "text" onChange={handleChange} value={search}
+//         />
+//           {/* {searchResult.map((user, index) => {
+//             return (
+//               <TableRows
+//                 index={index}
+//                 image={user.image}
+//                 name={user.firstname + " " + user.lastname}
+//                 // sortName={sortName}
+//                 phone={user.phone}
+//                 email={user.email}
+//                 dob={user.dob}
+//                 key={index} />
+//             )
 
-          })} */}
+//           })} */}
 
-        {/* ()=> call the function  */}
-        <Table>
-          <TableHead />
-          {users.map((user, index) => {
-            return (
-              <TableRows
-                index={index}
-                image={user.image}
-                name={user.firstname + " " + user.lastname}
-                // sortName={sortName}
-                phone={user.phone}
-                email={user.email}
-                dob={user.dob}
-                key={index} />
-            )
+//         {/* ()=> call the function  */}
+//         <Table>
+//           <TableHead />
+//           {users.map((user, index) => {
+//             return (
+//               <TableRows
+//                 index={index}
+//                 image={user.image}
+//                 name={user.firstname + " " + user.lastname}
+//                 // sortName={sortName}
+//                 phone={user.phone}
+//                 email={user.email}
+//                 dob={user.dob}
+//                 key={index} />
+//             )
 
-          })}
-        </Table>
+//           })}
+//         </Table>
 
-      </div>
-    );
-  }
-
-
-export default App;
+//       </div>
+//     );
+//   }
 
 
- // Function SORT 
+// export default App;
+
+
+//  // Function SORT 
 
   // const sortName = ()=> {
   //   users.sort();

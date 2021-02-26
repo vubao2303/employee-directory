@@ -12,13 +12,17 @@
 // export default Table;
 
 import React from "react";
+import TableHead from "./TableHead.js"
 
 function Table(props) {
   return (
     <div>
 
       <table className="table">
-        {props.children}
+        
+      <TableHead />
+        {/* {props.children} */}
+        
         <tbody>
 
           {props.children}
