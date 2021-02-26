@@ -20,7 +20,7 @@ function Table(props) {
 
       <table className="table">
         
-      <TableHead />
+      <TableHead sortName={props.sortName}/>
         {/* {props.children} */}
         
         <tbody>

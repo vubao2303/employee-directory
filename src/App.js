@@ -5,7 +5,7 @@ import Search from "./components/SearchForm.js"
 import TableRows from "./components/TableRows.js"
 import API from "./utils/API.js";
 import Table from "./components/Table.js"
-import TableHead from "./components/TableHead.js"
+// import TableHead from "./components/TableHead.js"
 
 function App() {
   // set hooks 
@@ -14,7 +14,7 @@ function App() {
   // const [seacrhResult, setSearchResult]= useState("")
   // const [seacrhResult, setSearchResult]= useState([])
   // const [sort, setSort] = useState("")
-  
+
 
   //Use Effect
   useEffect(() => {
@@ -30,9 +30,9 @@ function App() {
   }
 
 
-// One way
+  // One way
   // const handleSearch = event => {
-    // e.preventDefault();
+  // e.preventDefault();
   //   // Destructure the name and value properties off of event.target
   //   // Update the appropriate state
   //   const { value } = event.target;
@@ -53,91 +53,171 @@ function App() {
 
   // }
 
-  // Threeway 
   const handleSearch = e => {
-    e.preventDefault();
+    // e.preventDefault();
+
     const { value } = e.target;
     console.log(value);
-
     setSearch(value);
 
-    let searchUsers = users.filter(user => {
-      return user.firstname.includes(search);
-    });
-    setUsers(searchUsers);
   }
+// by taking it outside of handle search 
+// we allow it to render over and over again 
+  let newUserArray = users.filter(user => {
+    
+      console.log(user.firstname)
+      return user.firstname.toLowerCase().indexOf(search.toLowerCase()) !== -1 || user.lastname.toLowerCase().indexOf(search.toLowerCase()) !== -1
+    
+  })
 
-  // if (search.length >0){
-  //   user = users.filter(user => {
-  //     return user.firstname.include(e.target.value );
-  //   });
+
+
+  //   const sortName = () => {
+
+  //   const newSortUser = []
+  //   users.sort(function (a, b) {
+  //     var nameA = a.name.toLowerCase(), nameB = b.name.toLowerCase()
+  //     if (nameA < nameB) //sort string ascending
+  //       return -1
+  //     if (nameA > nameB)
+  //       return 1
+  //     return 0 //default return value (no sorting)
+  //   })
+  //   setUsers(users)
   // }
-  // when search, you want to return the new array, with only the e.target.value in it 
+// const sortName= ()
 
-  // useEffect (() => {
-  //   handleSearch();
-  // }[search]);
+//  let newSort= [...users]
+//  setUsers(newsort)
+  
+//  newSort.sort((a,b)=>{
+//   // let nameA = a.firstname.toLowerCase()
+//   // let nameB = b.firstname.toLowerCase()
+//    if (a<b){
 
-  //   API.SearchTerm ()
-  //   .then(res => setSearch({name: {users}}))
-  //   handleSearch()
-  // }, [search])
+//    }
+//  })
 
-  // function handleSearch(e) {
-  //   console.log(e.target.value)
-  //   setSearch(e.target.value);
-  //   // };
-  // }
+ const sortName = () => {
+    let newSortUser = [];
+    let switchUser =[]
+    newSortUser= [...users]
+    switchUser=[...users]
+    console.log (switchUser)
+    newSortUser.sort(function (a, b) {
+      let nameA = a.firstname.toLowerCase(), nameB = b.firstname.toLowerCase()
+      if (nameA < nameB) //sort string ascending
+        return -1
+    })
+    console.log(users) //non sort 
+    console.log(newSortUser)
+    if (newSortUser !== switchUser)
+    {console.log("apple")
+      setUsers(newSortUser)}
+    else {
+      console.log("banana")
+      newSortUser.reverse();
+      setUsers(newSortUser)
+    }
+  }
+// B trying
 
-  // useEffect(() => {
-  //   if (!search) {
-  //     return;
+  // const sortName = () => {
+  //   let newSortUser = [];
+  //   let switchUser =[]
+  //   newSortUser= [...users]
+  //   switchUser=[...users]
+  //   newSortUser.sort(function (a, b) {
+  //     let nameA = a.firstname.toLowerCase(), nameB = b.firstname.toLowerCase()
+  //     if (nameA < nameB) //sort string ascending
+  //       return -1
+  //     if(nam)
+  //     return -1
+  //   })
+  //   console.log(users) //non sort 
+  //   console.log(newSortUser)
+
+  //   if (newSortUser === switchUser)
+  //   {console.log("apple")
+  //     setUsers(newSortUser)}
+  //   else {
+  //     console.log("banana")
+  //     newSortUser.reverse();
+  //     setUsers(newSortUser)
   //   }
+  // }
+  // if (newSortUser) {
+  //   setUsers(newSortUser.reverse())
+  // }
 
-  //   API.searchTerm(search)
-  //     .then(res => {
-  //       if (res.data.length === 0) {
-  //         throw new Error("No results found.");
-  //       }
-  //       if (res.data.status === "error") {
-  //         throw new Error(res.data.message);
-  //       }
-  //       setUsers();
-  //     })
 
-  // }, [search]);
 
- 
 
-    return (
-      <div>
-        <Header />
-        <Search
-          className="form-group mt-5" type= "text"  onChange={handleSearch} value={search} users={users}/>
+  // const sortName =(data=[...users]) =>{
+  //   let newsort = data.sort((a,b)=> {
+  //     a.firstname.localeCompare(b.firstname)
+  //   })
+  //   setUsers(newsort)
+    
+  // }
 
-        {/* ()=> call the function  */}
-        <Table>
-          
-          {users.map((user, index) => {
-            return (
-              // <SearchResult >
-              <TableRows
-                index={index}
-                image={user.image}
-                name={user.firstname + " " + user.lastname}
-                // sortName={sortName}
-                phone={user.phone}
-                email={user.email}
-                dob={user.dob}
-                key={index} />
-            )
+  // else if (user.firstname.toLowerCase().indexOf(value.toLowerCase()) ){
+  //   setUsers(searchUsers)
+  // }
+  // // Threeway 
+  // const handleSearch = e => {
+  //   e.preventDefault();
 
-          })}
-        </Table>
+  //   const { value } = e.target;
 
-      </div>
-    );
-  }
+  //   console.log(value);
+
+
+  //   setSearch(value);
+
+
+  //   let searchUsers = users.filter(user => {
+
+  //     return user.firstname.includes(search);
+
+  //   });
+  //   setUsers(searchUsers);
+  // }
+
+
+
+
+
+
+  return (
+    <div>
+      <Header />
+      <Search
+        className="form-group mt-5" type="text" onChange={handleSearch} value={search} users={users} />
+
+      {/* ()=> call the function  */}
+      <Table sortName={ ()=> sortName () }>
+
+        {newUserArray.map((user, index) => {
+          return (
+            // <SearchResult >
+            <TableRows
+              index={index}
+              image={user.image}
+              name={user.firstname + " " + user.lastname}
+              
+              phone={user.phone}
+              email={user.email}
+              dob={user.dob}
+              key={index} />
+          )
+
+        })}
+      </Table>
+
+    </div>
+  );
+}
 
 
 export default App;
@@ -431,7 +511,7 @@ export default App;
 //   //   };
 //   //   setEmployees(employeeSearch);
 //   // }, [search]);
- 
+
 
 //     return (
 //       <div>
