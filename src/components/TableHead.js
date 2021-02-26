@@ -7,7 +7,7 @@ function TableHead(props) {
           <tr>
             <th scope="col">Image</th>
             <th scope="col" onClick= {props.sortName}>Name ▼</th>
-            <th scope="col">Phone</th>
+            <th scope="col" onClick= {props.sortPhone}>Phone</th>
             <th scope="col">Email</th>
             <th scope="col">DOB</th>
           </tr>

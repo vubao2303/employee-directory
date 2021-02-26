@@ -20,38 +20,16 @@ function App() {
   useEffect(() => {
     loadUsers();
   }, [])
+  
   //Function loadUsers 
   const loadUsers = () => {
     API.getEmployees().then((users) => {
       setUsers(users.sort())
-      console.log(users)
+      // console.log(users)
     })
       .catch(err => console.log(err));
   }
 
-
-  // One way
-  // const handleSearch = event => {
-  // e.preventDefault();
-  //   // Destructure the name and value properties off of event.target
-  //   // Update the appropriate state
-  //   const { value } = event.target;
-  //   setSearch(value);
-  // };
-
-  // Two way
-  // const handleSearch= e =>{
-  //   e.preventDefault();
-  //   // const { value } = e.target;
-  //   // setSearch(value);
-  //   setSearch(e.target.value);
-  //   if (search.length >0){
-  //   setUsers(users.filter(user => {
-  //     return user.firstName.include(e.target.value ) &&   user.lastName.include(e.target.value );
-  //   }));
-  // }
-
-  // }
 
   const handleSearch = e => {
     // e.preventDefault();
@@ -65,7 +43,7 @@ function App() {
 // we allow it to render over and over again 
   let newUserArray = users.filter(user => {
     
-      console.log(user.firstname)
+      // console.log(user.firstname)
       return user.firstname.toLowerCase().indexOf(search.toLowerCase()) !== -1 || user.lastname.toLowerCase().indexOf(search.toLowerCase()) !== -1
     
   })
@@ -102,24 +80,40 @@ function App() {
     let newSortUser = [];
     let switchUser =[]
     newSortUser= [...users]
-    switchUser=[...users]
-    console.log (switchUser)
     newSortUser.sort(function (a, b) {
       let nameA = a.firstname.toLowerCase(), nameB = b.firstname.toLowerCase()
       if (nameA < nameB) //sort string ascending
         return -1
     })
-    console.log(users) //non sort 
-    console.log(newSortUser)
-    if (newSortUser !== switchUser)
-    {console.log("apple")
-      setUsers(newSortUser)}
-    else {
-      console.log("banana")
-      newSortUser.reverse();
-      setUsers(newSortUser)
-    }
+    setUsers(newSortUser)
   }
+
+  const sortPhone = () => {
+    let newSortUser = [];
+    let switchUser =[]
+    newSortUser= [...users]
+    newSortUser.sort(function (a, b) {
+      let nameA = a.phone, nameB = b.phone
+      if (nameA < nameB) //sort string ascending
+        return -1
+    })
+    setUsers(newSortUser)
+
+  }
+
+  // const sortName = () => {
+  //   let newSortUser = [];
+  //   let switchUser =[]
+  //   newSortUser= [...users]
+  //   console.log (switchUser)
+  //   newSortUser.sort(function (a, b) {
+  //     let nameA = a.firstname.toLowerCase(), nameB = b.firstname.toLowerCase()
+  //     if (nameA < nameB) //sort string ascending
+  //       return -1
+  //   })
+  //   setUsers(newSortUser)
+
+  // }
 // B trying
 
   // const sortName = () => {
@@ -196,7 +190,7 @@ function App() {
         className="form-group mt-5" type="text" onChange={handleSearch} value={search} users={users} />
 
       {/* ()=> call the function  */}
-      <Table sortName={ ()=> sortName () }>
+      <Table sortName={ ()=> sortName () } sortPhone={ ()=> sortPhone () }>
 
         {newUserArray.map((user, index) => {
           return (
@@ -205,7 +199,6 @@ function App() {
               index={index}
               image={user.image}
               name={user.firstname + " " + user.lastname}
-              
               phone={user.phone}
               email={user.email}
               dob={user.dob}
@@ -213,6 +206,8 @@ function App() {
           )
 
         })}
+
+
       </Table>
 
     </div>

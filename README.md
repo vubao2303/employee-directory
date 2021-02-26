@@ -1,8 +1,9 @@
 # employees-directory
-react
+Using react to create an employee directory. The page is populated with employees' images, names, phone numbers, email, and day of birth. The search bar allows user to look up employees name and when the name column is clicked, employees' names will be sort in alphabetical order
 
 
 ![]()
+![Site Image](./src/style/screenshot.png)
 
 
 

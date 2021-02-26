@@ -5,7 +5,7 @@ function Header () {
 	return (
 		<div className="header">
 			<h1 className="title">Employee Directory </h1>
-			<h4 className="subtitle">Click on arrows to filter by column</h4>
+			<h6 className="subtitle">Click on name to sort alphebetically and search for name in the search box</h6>
 		</div>
 	);
 }

@@ -1,5 +1,6 @@
 .header {
   text-align:center;
+  width: 100%;
   background-image: linear-gradient(360deg,rgba(255,0,0,0),  rgb(115, 0, 255));
 }
 
