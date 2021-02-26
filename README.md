@@ -9,7 +9,7 @@ Using react to create an employee directory. The page is populated with employee
 
 ## Deployed-Link
 
-[Deployed Link]()  
+[Deployed Link](https://vubao2303.github.io/employee-directory/)  
 
 # Table of Contents 
 
@@ -34,7 +34,7 @@ Using react to create an employee directory. The page is populated with employee
   <ul> 
   <li> Component folders 
 
-  - Header.js file has header title 
+  - Header.js file has title and information about the page
 
   <li> Style folder contains style.css file to decorate the interface
   <li> App.js file
@@ -47,7 +47,8 @@ Using react to create an employee directory. The page is populated with employee
   
   - Render all the necessary components to set up the page 
 
-* In util folder 
+  - In util folder 
+  
   <li> images.json file contains all the roses pictures, each has an id, a name, an image link and a click with flase boleean value, 
   <li> index.js file render App component and send it to html 
   
@@ -65,11 +66,12 @@ To use components in  application
 ReactDOM.render(<App />, document.getElementById("root"));
 ```
 
+Render html components 
 ``` Javascript
   return (
     <div>
       <Header />
-      <Search className="form-group mt-5" onKeyUp={(e) =>handleSearch(e)} />
+      <Search />
       {/* ()=> call the function  */}
       <Table>
         <TableHead /> {users.map((user, index) => {
@@ -97,6 +99,8 @@ function SearchForm(props) {
     </div> ); }
 export default SearchForm;
 ``` 
+
+Get the props from App. js to dynamically generate tabel rows 
 ``` Javascript
 function TableRows({ index,image, name, phone, email, dob }) {
   return (
